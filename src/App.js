@@ -2,6 +2,7 @@ import React from 'react';
 import { Block } from './Block';
 import './index.scss';
 
+// Starting remote development
 function App() {
   return (
     <div className="App">
