@@ -10,7 +10,7 @@ body {
   user-select: none;
 }
 
-.App {
+.app {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 30px;
@@ -23,7 +23,9 @@ body {
 }
 
 .block {
-  input {
+  position: relative;
+
+  input, .output {
     border: 1px solid rgba(0, 0, 0, 0.1);
     font-size: 3rem;
     font-weight: bold;
@@ -34,6 +36,19 @@ body {
     border-radius: 5px;
     width: 100%;
   }
+  & .dropDownList {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(198, 189, 189);
+    position: absolute;
+    top: 40px;
+    right: 0;
+    z-index: 10;
+    width: 56px;
+    height: 120px;
+    overflow: scroll;
+  }
+  
 }
 
 .currencies {
@@ -72,10 +87,47 @@ body {
       flex: 0 0 50px;
       border-right: 0;
 
+      &.open {
+        svg {
+          transition: all 0.3s ease-in-out;
+          transform: rotate(180deg); 
+        }
+      }
+      &.close {
+        svg {
+          transition: all 0.3s ease-in-out;
+        }
+      }
       svg {
         width: 16px;
         height: 16px;
       }
+
     }
+  }
+}
+
+@media (max-width: 920px) {
+  .app {
+    grid-template-columns: 1fr;
+    grid-row-gap: 30px;
+    width: 600px;
+  }
+}
+@media (max-width: 700px) {
+  .app {
+    grid-template-columns: 1fr;
+    grid-row-gap: 30px;
+    width: 400px;
+  }
+}
+@media (max-width: 470px) {
+  .app {
+    grid-template-columns: 1fr;
+    grid-row-gap: 30px;
+    width: 300px;
+  }
+  .currencies li{
+    padding: 5px 10px;
   }
 }
