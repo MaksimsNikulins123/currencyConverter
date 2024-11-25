@@ -1,5 +1,5 @@
 {
-  "name": "currancyConverter",
+  "name": "currancy-converter",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
