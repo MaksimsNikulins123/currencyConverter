@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import './index.scss';
-import { COPY_FETCH_JSON } from './constants/constants';
 import { FromCurrency } from './components/FromCurrency/FromCurrency';
 import { ToCurrency } from './components/ToCurrency/ToCurrency';
 
@@ -24,42 +23,27 @@ function App() {
     const convertedValue = price * rates[toCurrency]
     setToCurrencyConvertValue(convertedValue.toFixed(2))
   }
-  
- 
-  
-  useEffect(() => {
-    try {
-      const json = COPY_FETCH_JSON;
-      const currenciesArray = Object.keys(json.rates);
-      setCurrencies(currenciesArray);
-      const rates = json.rates;
-      setRates(rates)
-      setIsLoading(false)
-    } catch (error) {
-              console.log(error);
-              alert('Failed get info');
-            }
-  },[])
 
   useEffect(() => {
     convertCurrency(fromCurrencyInput, rates, fromCurrency, toCurrency)
   },[fromCurrencyInput, rates, fromCurrency, toCurrency])
 
-  // useEffect(() => {
+  useEffect(() => {
       
-  //     fetch('http://data.fixer.io/api/latest?access_key=361c89aa860d8da7c25a5c9c44af76cf')
-  //     .then(response => response.json())
-  //     .then((json) => {
-  //       const currenciesArray = Object.keys(json.rates);
-  //       setCurrencies(currenciesArray);
-  //       setRates(json.rates)
-  //       setIsLoading(false)
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //       alert('Failed get info');
-  //     });
-  //   }, [])
+     
+      fetch('https://674486fdb4e2e04abea29448.mockapi.io/currency_rates')
+      .then((res) => res.json())
+      .then((json) => {
+        const currenciesArray = Object.keys(json[0].rates);
+        setCurrencies(currenciesArray);
+        setRates(json[0].rates)
+        setIsLoading(false)
+      })
+      .catch(error => {
+        console.log(error);
+        alert('Failed get info');
+      });
+    }, [])
 
 const onChangeFromCurrency = (fromCurrency) => {
     setFromCurrency(fromCurrency)
