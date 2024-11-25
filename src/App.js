@@ -25,14 +25,20 @@ function App() {
     setToCurrencyConvertValue(convertedValue.toFixed(2))
   }
   
+ 
   
   useEffect(() => {
-    const json = COPY_FETCH_JSON;
-    const currenciesArray = Object.keys(json.rates);
-    setCurrencies(currenciesArray);
-    const rates = json.rates;
-    setRates(rates)
-    setIsLoading(false)
+    try {
+      const json = COPY_FETCH_JSON;
+      const currenciesArray = Object.keys(json.rates);
+      setCurrencies(currenciesArray);
+      const rates = json.rates;
+      setRates(rates)
+      setIsLoading(false)
+    } catch (error) {
+              console.log(error);
+              alert('Failed get info');
+            }
   },[])
 
   useEffect(() => {
@@ -46,7 +52,8 @@ function App() {
   //     .then((json) => {
   //       const currenciesArray = Object.keys(json.rates);
   //       setCurrencies(currenciesArray);
-  //       setRates(json.rates) 
+  //       setRates(json.rates)
+  //       setIsLoading(false)
   //     })
   //     .catch(error => {
   //       console.log(error);
